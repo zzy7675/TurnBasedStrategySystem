@@ -7,9 +7,13 @@ public class Unit : MonoBehaviour
     [SerializeField] private Animator _unitAnimator;
     private Vector3 _targetPosition;
 
+    void Awake()
+    {
+        _targetPosition = transform.position;
+    }
     private void Update()
     {
-        if (Vector3.Distance(transform.position, _targetPosition) > Mathf.Epsilon)
+        if (Vector3.Distance(transform.position, _targetPosition) > 0.1f)
         {
             Vector3 moveDirection = (_targetPosition - transform.position).normalized;
             float moveSpeed = 4f;
@@ -23,13 +27,9 @@ public class Unit : MonoBehaviour
             
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Move(MouseWorld.GetPosition());
-        }
     }
 
-    private void Move(Vector3 targetPosition)
+    public void Move(Vector3 targetPosition)
     {
         _targetPosition = targetPosition;
     }
