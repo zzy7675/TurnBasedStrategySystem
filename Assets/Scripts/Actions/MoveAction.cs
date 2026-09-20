@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAction : MonoBehaviour
+public class MoveAction : BaseAction
 {
     [SerializeField] private Animator _unitAnimator;
     [SerializeField] private int _maxMoveDistance = 4;
     private Vector3 _targetPosition;
-    private Unit _unit;
-    private bool _isActive;
+
     
-    private void Awake()
+    protected override void Awake()
     {
-        _unit = GetComponent<Unit>();
+        base.Awake();
         _targetPosition = transform.position;
     }
 

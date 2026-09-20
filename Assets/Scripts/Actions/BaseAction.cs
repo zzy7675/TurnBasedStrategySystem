@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseAction : MonoBehaviour
+public abstract class BaseAction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected Unit _unit;
+    protected bool _isActive;
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Awake()
     {
-        
+        _unit = GetComponent<Unit>();
     }
 }

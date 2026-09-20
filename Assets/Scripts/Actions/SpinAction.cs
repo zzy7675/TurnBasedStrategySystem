@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinAction : MonoBehaviour
+public class SpinAction : BaseAction
 {
     private float totalSpinAmount;
-    private bool _isActive;
+
     private void Update()
     {
         if (!_isActive)
