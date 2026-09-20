@@ -22,13 +22,13 @@ public class MoveAction : BaseAction
         {
             return;
         }
-        if (Vector3.Distance(transform.position, _targetPosition) > 0.1f)
+        Vector3 moveDirection = (_targetPosition - transform.position).normalized;
+        float stoppingDistance = .1f;
+        if (Vector3.Distance(transform.position, _targetPosition) > stoppingDistance)
         {
-            Vector3 moveDirection = (_targetPosition - transform.position).normalized;
             float moveSpeed = 4f;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
-            float rotateSpeed = 10f;
-            transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
+
             _unitAnimator.SetBool("IsWalking", true);
         } else
         {
@@ -36,21 +36,17 @@ public class MoveAction : BaseAction
             _isActive = false;
             onActionComplete();
         }
+        float rotateSpeed = 10f;
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
     }
-    public void Move(GridPosition gridPosition, Action onActionComplete)
+    public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
         this.onActionComplete = onActionComplete;
         _targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
         _isActive = true;
     }
 
-    public bool IsValidActionGridPosition(GridPosition gridPosition)
-    {
-        List<GridPosition> validGridPositionList = GetValidActionGridPositionList();
-        return validGridPositionList.Contains(gridPosition);
-    }
-
-    public List<GridPosition> GetValidActionGridPositionList()
+    public override List<GridPosition> GetValidActionGridPositionList()
     {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textMeshPro: {fileID: 7199530015164341769}
-  button: {fileID: 7199530015115549913}
+  _button: {fileID: 7199530015115549913}
 --- !u!1 &7199530015164341771
 GameObject:
   m_ObjectHideFlags: 0
