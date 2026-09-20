@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpinAction : BaseAction
 {
-    private float totalSpinAmount;
+    private float _totalSpinAmount;
 
     private void Update()
     {
@@ -15,16 +16,18 @@ public class SpinAction : BaseAction
 
         float spinAddAmount = 360f * Time.deltaTime;
         transform.eulerAngles += new Vector3(0, spinAddAmount, 0);
-        totalSpinAmount += spinAddAmount;
-        if (totalSpinAmount >= 360f)
+        _totalSpinAmount += spinAddAmount;
+        if (_totalSpinAmount >= 360f)
         {
             _isActive = false;
+            onActionComplete();
         }
 
     }
-    public void Spin()
+    public void Spin(Action onActionComplete)
     {
+        this.onActionComplete = onActionComplete;
         _isActive = true;
-        totalSpinAmount = 0;
+        _totalSpinAmount = 0;
     }
 }

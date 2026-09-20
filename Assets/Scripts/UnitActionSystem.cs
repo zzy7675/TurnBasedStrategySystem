@@ -9,6 +9,8 @@ public class UnitActionSystem : MonoBehaviour
     [SerializeField] private Unit _selectedUnit;
     [SerializeField] private LayerMask _unitLayerMask;
 
+    private bool _isBusy;
+
     private void Awake()
     {
         if (Instance != null)
@@ -22,6 +24,10 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
+        if (_isBusy)
+        {
+            return;
+        }
         
         if (Input.GetMouseButtonDown(0))
         {
@@ -32,17 +38,27 @@ public class UnitActionSystem : MonoBehaviour
 
             if (_selectedUnit.GetMoveAction().IsValidActionGridPosition(mouseGridPosition))
             {
-                _selectedUnit.GetMoveAction().Move(mouseGridPosition);
+                SetBusy();
+                _selectedUnit.GetMoveAction().Move(mouseGridPosition, ClearBusy);
             }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            _selectedUnit.GetSpinAction().Spin();
+            SetBusy();
+            _selectedUnit.GetSpinAction().Spin(ClearBusy);
         }
     }
 
+    private void SetBusy()
+    {
+        _isBusy = true;
+    }
 
+    private void ClearBusy()
+    {
+        _isBusy = false;
+    }
     private bool TryHandleUnitSelection()
     {
         // cast mouse on-screen position into world position, and cast a ray from the camera to the mouse's world position
