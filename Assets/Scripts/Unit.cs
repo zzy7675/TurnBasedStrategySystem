@@ -6,11 +6,19 @@ public class Unit : MonoBehaviour
 {
     [SerializeField] private Animator _unitAnimator;
     private Vector3 _targetPosition;
+    private GridPosition _gridPosition;
 
-    void Awake()
+    private void Awake()
     {
         _targetPosition = transform.position;
     }
+
+    private void Start()
+    {
+        _gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        LevelGrid.Instance.AddUnitAtGridPosition(_gridPosition, this);
+    }
+
     private void Update()
     {
         if (Vector3.Distance(transform.position, _targetPosition) > 0.1f)
@@ -24,9 +32,14 @@ public class Unit : MonoBehaviour
         } else
         {
             _unitAnimator.SetBool("IsWalking", false);
-            
         }
-
+        
+        GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        if (newGridPosition != _gridPosition)
+        {
+            LevelGrid.Instance.UnitMovedGridPosition(this, _gridPosition, newGridPosition);
+            _gridPosition = newGridPosition;
+        }
     }
 
     public void Move(Vector3 targetPosition)
