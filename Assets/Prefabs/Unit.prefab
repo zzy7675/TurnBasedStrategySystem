@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitAnimator: {fileID: 1873077545951916989}
-  _maxMoveDistance: 1
+  _maxMoveDistance: 4
 --- !u!1 &2136815414923885897
 GameObject:
   m_ObjectHideFlags: 0
