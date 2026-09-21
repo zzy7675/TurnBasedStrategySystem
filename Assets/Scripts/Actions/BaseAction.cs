@@ -30,4 +30,16 @@ public abstract class BaseAction : MonoBehaviour
     {
         return 1;
     }
+
+    protected void ActionStart(Action onActionComplete)
+    {
+        _isActive = true;
+        this.onActionComplete = onActionComplete;
+    }
+
+    protected void ActionComplete()
+    {
+        _isActive = false;
+        onActionComplete();
+    }
 }

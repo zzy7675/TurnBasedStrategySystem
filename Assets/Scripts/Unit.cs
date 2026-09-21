@@ -8,6 +8,8 @@ public class Unit : MonoBehaviour
 
     public static event EventHandler OnAnyActionPointsChanged;
 
+    [SerializeField] private bool _isEnemy;
+
     private const int ACTION_POINTS_MAX = 2;
     private GridPosition _gridPosition;
     private MoveAction _moveAction;
@@ -63,6 +65,16 @@ public class Unit : MonoBehaviour
         return _actionPoints;
     }
 
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
+    }
+
+    public bool IsEnemy()
+    {
+        return _isEnemy;
+    }
+
     public bool TrySpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if (CanSpendActionPointsToTakeAction(baseAction))
@@ -94,7 +106,17 @@ public class Unit : MonoBehaviour
 
     private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
     {
-        _actionPoints = ACTION_POINTS_MAX;
-        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        if ((IsEnemy() && !TurnSystem.Instance.IsPlayerTurn()) ||
+            (!IsEnemy() && TurnSystem.Instance.IsPlayerTurn()))
+        {
+            _actionPoints = ACTION_POINTS_MAX;
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty); 
+        }
+
+    }
+
+    public void Damage()
+    {
+        Debug.Log(transform + " damaged!");
     }
 }
