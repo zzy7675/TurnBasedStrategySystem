@@ -5,7 +5,13 @@ using UnityEngine;
 
 public class ShootAction : BaseAction
 {
-    public event EventHandler OnShoot;
+    public event EventHandler<ShootEventArgs> OnShoot;
+
+    public class ShootEventArgs : EventArgs
+    {
+        public Unit shootingUnit;
+        public Unit targetUnit;
+    }
     private enum State
     {
         Aiming,
@@ -37,7 +43,11 @@ public class ShootAction : BaseAction
             case State.Shooting:
                 if (_canShootBullet)
                 {
-                    OnShoot?.Invoke(this, EventArgs.Empty);
+                    OnShoot?.Invoke(this, new ShootEventArgs
+                    {
+                        targetUnit = _targetUnit,
+                        shootingUnit = _unit
+                    });
                     Shoot();
                     _canShootBullet = false;
                 }
