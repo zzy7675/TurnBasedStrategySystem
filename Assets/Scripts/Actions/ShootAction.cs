@@ -43,11 +43,6 @@ public class ShootAction : BaseAction
             case State.Shooting:
                 if (_canShootBullet)
                 {
-                    OnShoot?.Invoke(this, new ShootEventArgs
-                    {
-                        targetUnit = _targetUnit,
-                        shootingUnit = _unit
-                    });
                     Shoot();
                     _canShootBullet = false;
                 }
@@ -143,6 +138,11 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
-        _targetUnit.Damage();
+        OnShoot?.Invoke(this, new ShootEventArgs
+        {
+            targetUnit = _targetUnit,
+            shootingUnit = _unit
+        });
+        _targetUnit.Damage(40);
     }
 }
