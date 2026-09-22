@@ -78,6 +78,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c70e075a2144ba04784d74b7b2889fd3, type: 2}
+    - target: {fileID: 7845370063499427038, guid: 4626a7a0257144447a79ea9390b35ab1,
+        type: 3}
+      propertyPath: _unitRagdollPrefab
+      value: 
+      objectReference: {fileID: 2924303385532457232, guid: a3b0c8ed8ead83848a53ffb9d0f5614b,
+        type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4626a7a0257144447a79ea9390b35ab1, type: 3}
