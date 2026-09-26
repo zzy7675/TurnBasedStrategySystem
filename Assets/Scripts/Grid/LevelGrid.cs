@@ -11,6 +11,10 @@ public class LevelGrid : MonoBehaviour
 
     [SerializeField] private GameObject _gridDebugObjectPrefab;
     private GridSystem<GridObject> _gridSystem;
+
+    [SerializeField] private int _width;
+    [SerializeField] private int _height;
+    [SerializeField] private float _cellSize;
     private void Awake()
     {
         if (Instance != null)
@@ -20,8 +24,13 @@ public class LevelGrid : MonoBehaviour
             return;
         }
         Instance = this;
-        _gridSystem = new GridSystem<GridObject>(10, 10, 2f, (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
+        _gridSystem = new GridSystem<GridObject>(_width, _height, _cellSize, (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
         // _gridSystem.CreateDebugObjects(_gridDebugObjectPrefab);
+    }
+
+    private void Start()
+    {
+        Pathfinding.Instance.Setup(_width, _height, _cellSize);
     }
 
     public void AddUnitAtGridPosition(GridPosition gridPosition, Unit unit)
