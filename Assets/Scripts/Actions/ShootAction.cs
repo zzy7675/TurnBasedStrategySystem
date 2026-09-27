@@ -130,7 +130,7 @@ public class ShootAction : BaseAction
                 if (Physics.Raycast(
                     unitWorldPosition + Vector3.up * unitShoulderHeight,
                     shootDirection,
-                    Vector3.Distance(_unit.GetWorldPosition(), targetUnit.GetWorldPosition()),
+                    Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
                     _obstaclesLayerMask))
                 {
                     // Blocked by an Obstacle
