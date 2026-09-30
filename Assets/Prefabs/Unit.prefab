@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 1806781057446407832}
   - component: {fileID: 855337144390260903}
   - component: {fileID: 7845370063499427038}
+  - component: {fileID: -1078214928232445898}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -190,6 +191,20 @@ MonoBehaviour:
   _unitRagdollPrefab: {fileID: 1777461459357657965, guid: 29bd31524b609fe4097fb0a343b45428,
     type: 3}
   _originalRagdollRootBone: {fileID: 1782135844206134975}
+--- !u!114 &-1078214928232445898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777461459357657965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05fbee4966b00de4a94719910af41ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grenadeProjectilePrefab: {fileID: 5575719732765731057, guid: 231a5b8758306e14ba48928858cbba3f,
+    type: 3}
 --- !u!1 &2136815414923885897
 GameObject:
   m_ObjectHideFlags: 0
