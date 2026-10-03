@@ -8,6 +8,8 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject _bulletProjectilePrefab;
     [SerializeField] private GameObject _shootPoint;
+    [SerializeField] private GameObject _riflePrefab;
+    [SerializeField] private GameObject _swordPrefab;
 
     private void Awake()
     {
@@ -20,7 +22,29 @@ public class UnitAnimator : MonoBehaviour
         {
             shootAction.OnShoot += ShootAction_OnShoot;
         }
+
+        if (TryGetComponent<SwordAction>(out SwordAction swordAction))
+        {
+            swordAction.OnSwordActionStarted += SwordAction_OnSwordActionStarted; 
+            swordAction.OnSwordActionCompleted += SwordAction_OnSwordActionCompleted; 
+        }
     }
+
+    private void Start()
+    {
+        EquipRifle();
+    }
+    private void SwordAction_OnSwordActionStarted(object sender, EventArgs e)
+    {
+        EquipSword();
+        _animator.SetTrigger("SwordSlash");
+    }
+
+    private void SwordAction_OnSwordActionCompleted(object sender, EventArgs e)
+    {
+        EquipRifle();
+    }
+
 
     private void ShootAction_OnShoot(object sender, ShootAction.ShootEventArgs e)
     {
@@ -41,5 +65,17 @@ public class UnitAnimator : MonoBehaviour
     private void MoveAction_OnStopMoving(object sender, EventArgs e)
     {
         _animator.SetBool("IsWalking", false);
+    }
+
+    private void EquipSword()
+    {
+        _swordPrefab.SetActive(true);
+        _riflePrefab.SetActive(false);
+    }
+
+    private void EquipRifle()
+    {
+        _swordPrefab.SetActive(false);
+        _riflePrefab.SetActive(true);
     }
 }
