@@ -60,7 +60,7 @@ public class UnitActionSystem : MonoBehaviour
     }
     private void HandleSelectedAction()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.Instance.IsMouseButtonDown())
         {
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 
@@ -91,10 +91,10 @@ public class UnitActionSystem : MonoBehaviour
     }
     private bool TryHandleUnitSelection()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.Instance.IsMouseButtonDown())
         {
             // cast mouse on-screen position into world position, and cast a ray from the camera to the mouse's world position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
 
             // The collider hit by the raycast(only hit mouse plane)
             if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, _unitLayerMask))

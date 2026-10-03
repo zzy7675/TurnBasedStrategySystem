@@ -19,7 +19,7 @@ public class MouseWorld : MonoBehaviour
     public static Vector3 GetPosition()
     {
         // cast mouse on-screen position into world position, and cast a ray from the camera to the mouse's world position
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
 
         // The collider hit by the raycast(only hit mouse plane)
         Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, instance._mousePlaneLayerMask);
