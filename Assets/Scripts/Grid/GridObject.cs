@@ -7,6 +7,7 @@ public class GridObject
     private GridSystem<GridObject> _gridSystem;
     private GridPosition _gridPosition;
     private List<Unit> _unitList;
+    private Door _door;
 
 
     public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
@@ -53,5 +54,15 @@ public class GridObject
             return _unitList[0];
         }
         return null;
+    }
+
+    public Door GetDoor()
+    {
+        return _door;
+    }
+
+    public void SetDoor(Door door)
+    {
+        _door = door;
     }
 }
