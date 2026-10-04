@@ -10,7 +10,7 @@ public class LevelGrid : MonoBehaviour
     public event EventHandler OnAnyUnitMovedGridPosition;
 
     [SerializeField] private GameObject _gridDebugObjectPrefab;
-    private GridSystem<GridObject> _gridSystem;
+    private GridSystemHex<GridObject> _gridSystem;
 
     [SerializeField] private int _width;
     [SerializeField] private int _height;
@@ -24,7 +24,7 @@ public class LevelGrid : MonoBehaviour
             return;
         }
         Instance = this;
-        _gridSystem = new GridSystem<GridObject>(_width, _height, _cellSize, (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
+        _gridSystem = new GridSystemHex<GridObject>(_width, _height, _cellSize, (GridSystemHex<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
         // _gridSystem.CreateDebugObjects(_gridDebugObjectPrefab);
     }
 

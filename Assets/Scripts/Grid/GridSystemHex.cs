@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class GridSystem<TGridObject>
+public class GridSystemHex<TGridObject>
 {
+
+    private const float HEX_VERTICAL_OFFSET_MULTIPLIER = .75f;
     private int _width;
     private int _height;
     private float _cellSize;
     private TGridObject[,] _gridObjectArray;
-    public GridSystem(int width, int height, float cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
+    public GridSystemHex(int width, int height, float cellSize, Func<GridSystemHex<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
         _width = width;
         _height = height;
@@ -30,7 +32,13 @@ public class GridSystem<TGridObject>
 
     public Vector3 GetWorldPosition(GridPosition gridPosition)
     {
-        return new Vector3(gridPosition.x, 0, gridPosition.z) * _cellSize;
+        if (gridPosition.z % 2 == 1)
+        {
+            return new Vector3(gridPosition.x, 0, 0) * _cellSize + new Vector3(0, 0, gridPosition.z) * _cellSize * HEX_VERTICAL_OFFSET_MULTIPLIER + new Vector3(1, 0, 0) * _cellSize * .5f;
+        } else
+        {
+            return new Vector3(gridPosition.x, 0, 0) * _cellSize + new Vector3(0, 0, gridPosition.z) * _cellSize * HEX_VERTICAL_OFFSET_MULTIPLIER;
+        }
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition)
