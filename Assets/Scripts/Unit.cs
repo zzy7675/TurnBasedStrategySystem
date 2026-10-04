@@ -12,7 +12,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private bool _isEnemy;
 
-    private const int ACTION_POINTS_MAX = 9;
+    private const int ACTION_POINTS_MAX = 3;
     private GridPosition _gridPosition;
     private BaseAction[] _baseActionArray;
     private HealthSystem _healthSystem;

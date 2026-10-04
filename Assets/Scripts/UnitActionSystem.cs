@@ -60,7 +60,7 @@ public class UnitActionSystem : MonoBehaviour
     }
     private void HandleSelectedAction()
     {
-        if (InputManager.Instance.IsMouseButtonDown())
+        if (InputManager.Instance.IsMouseButtonDownThisFrame())
         {
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
 
@@ -91,7 +91,7 @@ public class UnitActionSystem : MonoBehaviour
     }
     private bool TryHandleUnitSelection()
     {
-        if (InputManager.Instance.IsMouseButtonDown())
+        if (InputManager.Instance.IsMouseButtonDownThisFrame())
         {
             // cast mouse on-screen position into world position, and cast a ray from the camera to the mouse's world position
             Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
