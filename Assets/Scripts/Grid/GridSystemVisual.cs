@@ -27,7 +27,6 @@ public class GridSystemVisual : MonoBehaviour
     [SerializeField] private GameObject _gridSytemVisualSinglePrefab;
     [SerializeField] private List<GridVisualTypeMaterial> _gridVisualTypeMaterialList;
     private GridSystemVisualSingle[,] _gridSystemVisualSingleArray;
-    private GridSystemVisualSingle _lastSelectedGridSystemVisualSingle;
 
     private void Awake()
     {
